@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Roboto:wght@500;700;900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+
+<body class="body ">
+    <div class="container">
+        <div class="header">
+            <div class="content">
+                <p>the.weather</p>
+                <div class="temp-flex">
+                    <h1><%= temperature %>°</h1>
+                    <div class="place">
+                        <h2><%= cityName %></h2>
+                        <% const date = new Date();%>
+                        <%const hour = date.getHours();%>
+                        <%const min = date.getMinutes(); %>
+                        <% var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];%>
+                        <%var months = ['January','February','March','April','May','June','July','August','September','October','November','December']; %>
+                        <% var dates = date.getDate() %>
+                        <% var day = days[ date.getDay() ];%>
+                        <%var month = months[ date.getMonth() ]; %>
+                        <% var year = date.getFullYear() %>
+                        <p><%=date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })%> -
+                            <%=day%>, <%=dates%> <%=month%> <%=year%></p>
+                    </div>
+                    <div class="weather-status">
+
+                        <div class="svg"> <img src="<%= icon %>" height="70" alt=""></div>
+                        <p id="weather-stat"><%=weather%>
+                            <% if(weather == "Clouds"){%>
+                            <style>
+                                .body::before {
+                                    content: '';
+                                    width: 100%;
+                                    height: 100%;
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    background-position: center;
+                                    background-image: url("/images/cloud.jpg");
+                                    background-repeat: no-repeat;
+                                    background-size: cover;
+                                    z-index: -1;
+                                    filter: blur(5px);
+                                }
+                            </style>
+                            <%} else if(weather == "Smoke"){%>
+                                <style>
+                                    .body::before {
+                                    content: '';
+                                    width: 100%;
+                                    height: 100%;
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    background-position: center;
+                                    background-image: url("/images/smoke.jpg");
+                                    background-repeat: no-repeat;
+                                    background-size: cover;
+                                    z-index: -1;
+                                    filter: blur(5px);
+                                }
+                                </style>
+                            <%} else if(weather == "Clear"){%>
+                                <style>
+                                    .body::before {
+                                    content: '';
+                                    width: 100%;
+                                    height: 100%;
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    background-position: center;
+                                    background-image: url("/images/clear.jpg");
+                                    background-repeat: no-repeat;
+                                    background-size: cover;
+                                    z-index: -1;
+                                    filter: blur(5px);
+                                }
+                                </style>
+                            <%} else if(weather == "snow"){%>
+                                <style>
+                                    .body::before {
+                                    content: '';
+                                    width: 100%;
+                                    height: 100%;
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    background-position: center;
+                                    background-image: url("/images/snow.jpg");
+                                    background-repeat: no-repeat;
+                                    background-size: cover;
+                                    z-index: -1;
+                                    filter: blur(5px);
+                                }
+                                </style>
+                            <%} else if(weather=="Thunderstorm"){%>
+                                <style>
+                                    .body::before {
+                                    content: '';
+                                    width: 100%;
+                                    height: 100%;
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    background-position: center;
+                                    background-image: url("/images/thunderstorm.jpg");
+                                    background-repeat: no-repeat;
+                                    background-size: cover;
+                                    z-index: -1;
+                                    filter: blur(5px);
+                                }
+                                </style>
+                            <%}%>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="search">
+                <div class="search-box">
+                    <div class="location-search">
+                        <form id="myForm" method="post" action="/get-location">
+                            <input type="text" name="location" placeholder="Another Location" />
+                            <div class="search-icon">
+                                <button type="submit">
+                                    <img src="images/search.png" height="30" alt="search-icon" type="submit" />
+
+
+                                </button>
+                                <!-- <input type="submit" value=""> -->
+                            </div>
+
+
+
+                        </form>
+                    </div>
+                </div>
+
+                <div class="default-locations">
+                    <form method="post" action="">
+                        <!-- <input id="get" type="submit" value="GET" formaction="/get-secret"> -->
+                        <p><a href="/get-birmingham">Birmingham</a></p>
+                        <p><a href="/get-manchester">Manchester</a></p>
+                        <p><a href="/get-newyork">New York</a></p>
+                        <p><a href="/get-california">California</a></p>
+                    </form>
+
+                    <hr />
+                </div>
+                <div class="weather-details">
+                    <h3>Weather Details</h3>
+                    <div class="weather-details-flex">
+                        <div class="weather-things">
+                            <p>Cloudy</p>
+                            <p>Humidity</p>
+                            <p>Wind</p>
+                            <p>Rain</p>
+                        </div>
+                        <div class="weather-values">
+                            <p><%= cloud %>%</p>
+                            <p><%= humid %>%</p>
+                            <p><%= wind %>km/h</p>
+                            <p><%= rain %>mm</p>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
