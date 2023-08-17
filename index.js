@@ -126,9 +126,9 @@ app.get("/get-manchester", async(req, res)=>{
         res.sendStatus(500);
     }
 })
-app.get("/get-newyork", async(req, res)=>{
+app.get("/get-karachi", async(req, res)=>{
     try{
-        const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=newyork&appid=${apiKey}`);
+        const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=karachi&appid=${apiKey}`);
         const resIcon =  result.data.weather[0].icon; 
         const icon = `https://openweathermap.org/img/wn/${resIcon}@2x.png`;
         const temp = JSON.stringify(result.data.main.temp);
