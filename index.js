@@ -1,11 +1,10 @@
-
 import express from "express"
 import bodyParser from "body-parser"
 import axios from "axios"
 import 'dotenv/config'
 const port = 3000;
 const app = express();
-const apiKey = `${process.env.api}`;
+const apiKey = process.env.api;
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -21,7 +20,7 @@ app.get("/", async(req, res)=>{
         const humidity = JSON.stringify(result.data.main.humidity);
         const wind = JSON.stringify(result.data.wind.speed);
         const cloud = JSON.stringify(result.data.clouds.all);
-        const rain = JSON.stringify(result.data.rain);
+        const pressure = JSON.stringify(result.data.main.pressure);
         // const icon = result.data.weather[0].icon;
         res.render("index.ejs", {
             temperature: (temp-273.15).toFixed(0),
@@ -30,7 +29,7 @@ app.get("/", async(req, res)=>{
             humid:humidity,
             wind:wind,
             cloud:cloud,
-            rain:rain,
+            pressure:pressure,
             icon: icon
         });
 
@@ -52,7 +51,7 @@ app.post("/get-location", async(req, res)=>{
         const humidity = JSON.stringify(result.data.main.humidity);
         const wind = JSON.stringify(result.data.wind.speed);
         const cloud = JSON.stringify(result.data.clouds.all);
-        const rain = JSON.stringify(result.data.rain);
+        const pressure = JSON.stringify(result.data.main.pressure);
         res.render("index.ejs", {
             temperature: (temp-273.15).toFixed(0),
             cityName: city,
@@ -60,7 +59,7 @@ app.post("/get-location", async(req, res)=>{
             humid:humidity,
             wind:wind,
             cloud:cloud,
-            rain:rain,
+            pressure:pressure,
             icon: icon
         });
 
@@ -81,7 +80,7 @@ app.get("/get-birmingham", async(req, res)=>{
         const humidity = JSON.stringify(result.data.main.humidity);
         const wind = JSON.stringify(result.data.wind.speed);
         const cloud = JSON.stringify(result.data.clouds.all);
-        const rain = JSON.stringify(result.data.rain);
+        const pressure = JSON.stringify(result.data.main.pressure);
         res.render("index.ejs", {
             temperature: (temp-273.15).toFixed(0),
             cityName: city,
@@ -89,7 +88,7 @@ app.get("/get-birmingham", async(req, res)=>{
             humid:humidity,
             wind:wind,
             cloud:cloud,
-            rain:rain,
+            pressure:pressure,
             icon: icon
         });
 
@@ -109,7 +108,7 @@ app.get("/get-manchester", async(req, res)=>{
         const humidity = JSON.stringify(result.data.main.humidity);
         const wind = JSON.stringify(result.data.wind.speed);
         const cloud = JSON.stringify(result.data.clouds.all);
-        const rain = JSON.stringify(result.data.rain);
+        const pressure = JSON.stringify(result.data.main.pressure);
         res.render("index.ejs", {
             temperature: (temp-273.15).toFixed(0),
             cityName: city,
@@ -117,7 +116,7 @@ app.get("/get-manchester", async(req, res)=>{
             humid:humidity,
             wind:wind,
             cloud:cloud,
-            rain:rain,
+            pressure:pressure,
             icon: icon
         });
 
@@ -126,9 +125,9 @@ app.get("/get-manchester", async(req, res)=>{
         res.sendStatus(500);
     }
 })
-app.get("/get-newyork", async(req, res)=>{
+app.get("/get-karachi", async(req, res)=>{
     try{
-        const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=newyork&appid=${apiKey}`);
+        const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=karachi&appid=${apiKey}`);
         const resIcon =  result.data.weather[0].icon; 
         const icon = `https://openweathermap.org/img/wn/${resIcon}@2x.png`;
         const temp = JSON.stringify(result.data.main.temp);
@@ -137,7 +136,7 @@ app.get("/get-newyork", async(req, res)=>{
         const humidity = JSON.stringify(result.data.main.humidity);
         const wind = JSON.stringify(result.data.wind.speed);
         const cloud = JSON.stringify(result.data.clouds.all);
-        const rain = JSON.stringify(result.data.rain);
+        const pressure = JSON.stringify(result.data.main.pressure);
         res.render("index.ejs", {
             temperature: (temp-273.15).toFixed(0),
             cityName: city,
@@ -145,7 +144,7 @@ app.get("/get-newyork", async(req, res)=>{
             humid:humidity,
             wind:wind,
             cloud:cloud,
-            rain:rain,
+            pressure:pressure,
             icon: icon
         });
 
@@ -165,7 +164,7 @@ app.get("/get-california", async(req, res)=>{
         const humidity = JSON.stringify(result.data.main.humidity);
         const wind = JSON.stringify(result.data.wind.speed);
         const cloud = JSON.stringify(result.data.clouds.all);
-        const rain = JSON.stringify(result.data.rain);
+        const pressure = JSON.stringify(result.data.main.pressure);
         res.render("index.ejs", {
             temperature: (temp-273.15).toFixed(0),
             cityName: city,
@@ -173,7 +172,7 @@ app.get("/get-california", async(req, res)=>{
             humid:humidity,
             wind:wind,
             cloud:cloud,
-            rain:rain,
+            pressure:pressure,
             icon: icon
         });
 
