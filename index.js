@@ -4,7 +4,7 @@ import axios from "axios"
 import 'dotenv/config'
 const port = 3000;
 const app = express();
-const apiKey ="17c9cc5992b0e85f51bee25b114daed8";
+const apiKey = process.env.API;
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
